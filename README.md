@@ -58,8 +58,4 @@ static const int CHANNEL_COUNT = 1;   // Number of channels (1 for mono, 2 for s
 
 ## License
 
-Each file in this project specifies its applicable license using an SPDX-License-Identifier comment at the top of the file. 
-Files which do not have a license comment at the top are licensed under the MIT License. See the respective license files for more details:
-
-- [MIT License](LICENSE.MIT)
-- [Apache License 2.0](LICENSE.Apache-2.0)
+This project is licensed under the Apache-2.0 License. See the `LICENSE` file for details.
