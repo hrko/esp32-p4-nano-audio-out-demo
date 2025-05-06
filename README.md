@@ -1,32 +1,65 @@
-# _Sample project_
+# ESP32-P4-NANO Audio Output Demo
 
-(See the README.md file in the upper level 'examples' directory for more information about examples.)
+This project demonstrates audio output functionality on the ESP32-P4-NANO development board. It generates a sine wave and plays it through the onboard audio codec and speaker.
 
-This is the simplest buildable example. The example is used by command `idf.py create-project`
-that copies the project to user specified path and set it's name. For more information follow the [docs page](https://docs.espressif.com/projects/esp-idf/en/latest/api-guides/build-system.html#start-a-new-project)
+## Features
 
+- Configurable I2S audio output with support for different sample rates, bit depths, and channel configurations.
+- Sine wave generation at a specified frequency and amplitude.
+- Integration with the ES8311 audio codec for speaker output.
+- FreeRTOS-based task management for audio generation and playback.
 
+## How to Use
 
-## How to use example
-We encourage the users to use the example as a template for the new projects.
-A recommended way is to follow the instructions on a [docs page](https://docs.espressif.com/projects/esp-idf/en/latest/api-guides/build-system.html#start-a-new-project).
+### Prerequisites
 
-## Example folder contents
+- ESP32-P4-NANO development board.
+- ESP-IDF installed and configured on your system.
+- A speaker connected to the board.
 
-The project **sample_project** contains one source file in C language [main.c](main/main.c). The file is located in folder [main](main).
+### Build and Flash
 
-ESP-IDF projects are built using CMake. The project build configuration is contained in `CMakeLists.txt`
-files that provide set of directives and instructions describing the project's source files and targets
-(executable, library, or both). 
+*The following steps are for the CLI, but can of course be done in the IDE as well.*
 
-Below is short explanation of remaining files in the project folder.
+1. Clone this repository to your local machine.
+2. Navigate to the project directory.
+3. Run the following commands to build and flash the project (replace `YOUR_SERIAL_PORT` with the actual serial port of your ESP32-P4-NANO board):
+   ```bash
+   idf.py build
+   idf.py -p YOUR_SERIAL_PORT flash
+   idf.py -p YOUR_SERIAL_PORT monitor
+   ```
+4. Reset the board if necessary.
+
+### Expected Output
+
+Once the project is running, you should hear a 1 kHz sine wave played through the speaker. The ESP-IDF monitor will display logs related to the audio initialization and playback.
+
+## Project Structure
 
 ```
 ├── CMakeLists.txt
 ├── main
 │   ├── CMakeLists.txt
-│   └── main.c
-└── README.md                  This is the file you are currently reading
+│   ├── main.c          // Main application logic
+│   ├── p4nano_audio.c  // Audio initialization and codec handling
+│   ├── p4nano_audio.h  // Audio-related definitions and declarations
+└── README.md            // Project documentation
 ```
-Additionally, the sample project contains Makefile and component.mk files, used for the legacy Make based build system. 
-They are not used or needed when building with CMake and idf.py.
+
+## Configuration
+
+The audio settings (e.g., sample rate, bit depth, and channels) can be modified in `main.c`:
+```c
+static const int SAMPLE_RATE = 48000; // Sample rate in Hz
+static const int BIT_DEPTH = 16;      // Bit depth
+static const int CHANNEL_COUNT = 1;   // Number of channels (1 for mono, 2 for stereo)
+```
+
+## License
+
+Each file in this project specifies its applicable license using an SPDX-License-Identifier comment at the top of the file. 
+Files which do not have a license comment at the top are licensed under the MIT License. See the respective license files for more details:
+
+- [MIT License](LICENSE.MIT)
+- [Apache License 2.0](LICENSE.Apache-2.0)
